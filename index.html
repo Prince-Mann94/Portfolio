@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prince Mann | Premium Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+  background:#020617;
+  color:#e2e8f0;
+  overflow-x:hidden;
+}
+
+/* ===== Animated Background ===== */
+.bg-blur{
+  position:fixed;
+  width:600px;
+  height:600px;
+  background:radial-gradient(circle,#6366f1,transparent);
+  filter:blur(120px);
+  opacity:.4;
+  top:-200px;
+  left:-200px;
+  z-index:-1;
+  animation:float 12s infinite alternate ease-in-out;
+}
+
+.bg-blur2{
+  right:-200px;
+  bottom:-200px;
+  left:auto;
+  background:radial-gradient(circle,#22c55e,transparent);
+}
+
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(80px)}
+}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;
+  width:100%;
+  backdrop-filter:blur(14px);
+  background:rgba(2,6,23,.6);
+  padding:15px 0;
+  text-align:center;
+  z-index:1000;
+}
+nav a{
+  color:#cbd5f5;
+  margin:0 18px;
+  text-decoration:none;
+  font-weight:500;
+  transition:.3s;
+}
+nav a:hover{color:white}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.hero h1{
+  font-size:3.2rem;
+  font-weight:700;
+  background:linear-gradient(90deg,#6366f1,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.typing{
+  margin-top:15px;
+  font-size:1.3rem;
+  opacity:.9;
+}
+
+.btn{
+  margin-top:30px;
+  padding:12px 28px;
+  border-radius:40px;
+  background:linear-gradient(90deg,#6366f1,#22c55e);
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  transition:.3s;
+}
+.btn:hover{transform:translateY(-4px)}
+
+section{max-width:1100px;margin:120px auto;padding:0 20px}
+
+h2{text-align:center;margin-bottom:50px;font-size:2.2rem}
+
+/* ===== GLASS CARD ===== */
+.card{
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(14px);
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 15px 40px rgba(0,0,0,.4);
+  transition:.4s;
+}
+.card:hover{transform:translateY(-10px)}
+
+/* ===== SKILLS ===== */
+.skills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.skills span{
+  padding:8px 18px;
+  border-radius:30px;
+  background:rgba(99,102,241,.25);
+  font-size:.9rem;
+}
+
+/* ===== PROJECT GRID ===== */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+.project-card h3{margin-bottom:10px}
+.project-links a{
+  display:inline-block;
+  margin-top:10px;
+  margin-right:10px;
+  font-size:.85rem;
+  text-decoration:none;
+  color:#22c55e;
+}
+
+/* ===== TIMELINE ===== */
+.timeline{border-left:2px solid #6366f1;padding-left:20px}
+.timeline div{margin-bottom:20px}
+
+/* ===== CONTACT ===== */
+.contact p{margin:10px 0}
+
+footer{text-align:center;padding:40px;opacity:.7}
+
+.fade{opacity:0;transform:translateY(40px);transition:.9s ease}
+.fade.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){.hero h1{font-size:2.3rem}}
+</style>
+</head>
+
+<body>
+
+<div class="bg-blur"></div>
+<div class="bg-blur bg-blur2"></div>
+
+<nav>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#journey">Journey</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<h1>Prince Mann</h1>
+<div class="typing" id="typing"></div>
+<a href="#projects" class="btn">Explore My Work</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="fade">
+<h2>About Me</h2>
+<div class="card">
+<p>
+Engineering student passionate about programming, algorithms, and solving real‑world problems. I focus on building strong fundamentals through coding practice and practical projects while continuously improving my development skills.
+</p>
+</div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="fade">
+<h2>Skills</h2>
+<div class="card skills">
+<span>C Programming</span>
+<span>Python</span>
+<span>Data Structures</span>
+<span>Algorithms</span>
+<span>Git & GitHub</span>
+<span>HTML & CSS</span>
+<span>Problem Solving</span>
+</div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="fade">
+<h2>Projects</h2>
+<div class="projects">
+<div class="card project-card">
+<h3>Matrix Algorithms</h3>
+<p>Matrix addition, multiplication and spiral traversal implementations in C.</p>
+<div class="project-links">
+<a href="#">GitHub</a>
+<a href="#">Demo</a>
+</div>
+</div>
+
+<div class="card project-card">
+<h3>Palindrome & String Tools</h3>
+<p>Programs solving logical problems including palindrome and string operations.</p>
+<div class="project-links">
+<a href="#">GitHub</a>
+</div>
+</div>
+
+<div class="card project-card">
+<h3>Python Algorithm Repository</h3>
+<p>Collection of algorithm practice and coding exercises.</p>
+<div class="project-links">
+<a href="#">GitHub</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey" class="fade">
+<h2>My Journey</h2>
+<div class="card timeline">
+<div><strong>B.Tech Engineering</strong><br>Currently building programming fundamentals</div>
+<div><strong>Started Coding</strong><br>Learning C, problem solving and algorithms</div>
+<div><strong>GitHub Portfolio</strong><br>Uploading projects and tracking growth</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="fade">
+<h2>Contact</h2>
+<div class="card contact">
+<p>Email: your.email@example.com</p>
+<p>GitHub: https://github.com/yourprofile</p>
+<p>LinkedIn: https://linkedin.com/in/yourprofile</p>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Prince Mann — Premium Static Portfolio</p>
+</footer>
+
+<script>
+/* Typing Animation */
+const text="B.Tech Student • Programmer • Problem Solver";
+let i=0;
+function type(){
+ if(i<text.length){
+  document.getElementById("typing").innerHTML+=text.charAt(i);
+  i++;
+  setTimeout(type,50);
+ }
+}
+type();
+
+/* Scroll Animation */
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(entry.isIntersecting){entry.target.classList.add('show');}
+ });
+});
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>

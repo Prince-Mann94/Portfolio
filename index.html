@@ -16,27 +16,26 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== Animated Background ===== */
+/* ===== Animated Background (nonâ€‘interactive) ===== */
 .bg-blur{
   position:fixed;
   width:600px;
   height:600px;
   background:radial-gradient(circle,#6366f1,transparent);
   filter:blur(120px);
-  opacity:.4;
+  opacity:.35;
   top:-200px;
   left:-200px;
-  z-index:-1;
+  z-index:-2;
+  pointer-events:none;
   animation:float 12s infinite alternate ease-in-out;
 }
-
 .bg-blur2{
   right:-200px;
   bottom:-200px;
   left:auto;
   background:radial-gradient(circle,#22c55e,transparent);
 }
-
 @keyframes float{
   from{transform:translateY(0)}
   to{transform:translateY(80px)}
@@ -46,8 +45,9 @@ body{
 nav{
   position:fixed;
   width:100%;
+  top:0;
   backdrop-filter:blur(14px);
-  background:rgba(2,6,23,.6);
+  background:rgba(2,6,23,.7);
   padding:15px 0;
   text-align:center;
   z-index:1000;
@@ -61,6 +61,9 @@ nav a{
 }
 nav a:hover{color:white}
 
+/* prevent content hiding under fixed nav */
+section{scroll-margin-top:90px}
+
 /* ===== HERO ===== */
 .hero{
   min-height:100vh;
@@ -69,9 +72,8 @@ nav a:hover{color:white}
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:20px;
+  padding:120px 20px 40px;
 }
-
 .hero h1{
   font-size:3.2rem;
   font-weight:700;
@@ -79,13 +81,12 @@ nav a:hover{color:white}
   -webkit-background-clip:text;
   color:transparent;
 }
-
 .typing{
   margin-top:15px;
   font-size:1.3rem;
   opacity:.9;
+  min-height:30px;
 }
-
 .btn{
   margin-top:30px;
   padding:12px 28px;
@@ -109,9 +110,9 @@ h2{text-align:center;margin-bottom:50px;font-size:2.2rem}
   border-radius:18px;
   padding:28px;
   box-shadow:0 15px 40px rgba(0,0,0,.4);
-  transition:.4s;
+  transition:.35s ease;
 }
-.card:hover{transform:translateY(-10px)}
+.card:hover{transform:translateY(-8px)}
 
 /* ===== SKILLS ===== */
 .skills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
@@ -128,7 +129,6 @@ h2{text-align:center;margin-bottom:50px;font-size:2.2rem}
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:25px;
 }
-.project-card h3{margin-bottom:10px}
 .project-links a{
   display:inline-block;
   margin-top:10px;
@@ -147,7 +147,7 @@ h2{text-align:center;margin-bottom:50px;font-size:2.2rem}
 
 footer{text-align:center;padding:40px;opacity:.7}
 
-.fade{opacity:0;transform:translateY(40px);transition:.9s ease}
+.fade{opacity:0;transform:translateY(40px);transition:.8s ease}
 .fade.show{opacity:1;transform:translateY(0)}
 
 @media(max-width:768px){.hero h1{font-size:2.3rem}}
@@ -202,7 +202,7 @@ Engineering student passionate about programming, algorithms, and solving realâ€
 <section id="projects" class="fade">
 <h2>Projects</h2>
 <div class="projects">
-<div class="card project-card">
+<div class="card">
 <h3>Matrix Algorithms</h3>
 <p>Matrix addition, multiplication and spiral traversal implementations in C.</p>
 <div class="project-links">
@@ -211,7 +211,7 @@ Engineering student passionate about programming, algorithms, and solving realâ€
 </div>
 </div>
 
-<div class="card project-card">
+<div class="card">
 <h3>Palindrome & String Tools</h3>
 <p>Programs solving logical problems including palindrome and string operations.</p>
 <div class="project-links">
@@ -219,7 +219,7 @@ Engineering student passionate about programming, algorithms, and solving realâ€
 </div>
 </div>
 
-<div class="card project-card">
+<div class="card">
 <h3>Python Algorithm Repository</h3>
 <p>Collection of algorithm practice and coding exercises.</p>
 <div class="project-links">
@@ -254,25 +254,37 @@ Engineering student passionate about programming, algorithms, and solving realâ€
 </footer>
 
 <script>
-/* Typing Animation */
+/* wait for DOM */
+document.addEventListener('DOMContentLoaded',()=>{
+
+/* Typing Animation (fixed duplicate bug) */
 const text="B.Tech Student â€¢ Programmer â€¢ Problem Solver";
+const el=document.getElementById('typing');
 let i=0;
 function type(){
- if(i<text.length){
-  document.getElementById("typing").innerHTML+=text.charAt(i);
-  i++;
-  setTimeout(type,50);
- }
+  if(i<text.length){
+    el.textContent+=text.charAt(i);
+    i++;
+    setTimeout(type,45);
+  }
 }
 type();
 
-/* Scroll Animation */
-const observer=new IntersectionObserver(entries=>{
- entries.forEach(entry=>{
-  if(entry.isIntersecting){entry.target.classList.add('show');}
- });
+/* Scroll Animation safe observer */
+if('IntersectionObserver' in window){
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      }
+    });
+  });
+  document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+}else{
+  document.querySelectorAll('.fade').forEach(el=>el.classList.add('show'));
+}
+
 });
-document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
 </script>
 
 </body>
